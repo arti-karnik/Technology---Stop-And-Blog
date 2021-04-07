@@ -1,0 +1,101 @@
+body {
+  font-family: sans-serif;
+  background-color: #d9ead4;
+}
+.navbar {
+    background-color: #231010;
+    padding-top: 20px;
+}
+
+#nav-title {
+    text-align:center;
+    color: whitesmoke;
+    font-style: italic;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    font: x-large;
+    text-align: center;
+  }
+  
+  .navbar-nav  a {
+    float: left;
+    color: #f2f2f2;
+    font-size: 17px;
+    text-align: right;
+    font-style: italic;
+    text-decoration: none;
+  }
+  .navbar-title  {
+    background-color: #d9ead4;
+    border-right: 5px solid #a7a7a7;
+    border-bottom: 5px solid #a7a7a7;
+    border-width: 10px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2px 5px 5px 5px;
+    color: hsl(206, 17%, 28%);
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
+  }
+  .navbar-nav > .active {
+    background-color: #3f3232;
+    color : white;
+    border-radius: 25px;
+    border: 2px solid #010002;
+  }
+  .navbar-nav > a:hover {
+    color : white;
+  }
+  .navbar-nav > li{
+    padding-left:30px;
+    padding-right:30px;
+    margin-top: 5px;
+  }
+  .navbar-toggler .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
+  .card {
+    background-color: transparent;
+    margin: 20px;
+    border: solid 3px black;
+  }
+  .card-header {
+    background-color: #231010;
+    color: white;
+  }
+    .card-title {
+    float: left;
+  }
+  .card-posted-date {
+    float: right;
+  }
+  .button {
+    background-color: #231010;
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  .button-text {
+    margin: 25px;
+  }
+  .newPost {
+    position:absolute;
+    bottom: 5%;
+    right:50%;
+  }
+  .container-dashboard {
+    padding: 30px;
+    margin: 20px;
+  }
+  #row {
+    text-align: left;
+    border-bottom: 2px solid lightgray;
+    font-size: 18px;
+    background-color: gray;
+    padding: 10px;
+    color: white;
+    border: solid 2px lightgrey;
+    border-radius: 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }  
