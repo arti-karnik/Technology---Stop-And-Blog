@@ -24,21 +24,14 @@ router.post('/', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-  console.log("in loggin" + req.body.username);
-  console.log("in loggin" + req.body.password);
-
   try {
     const dbUserData = await User.findOne({
       where: {
         username: req.body.username,
       },
     });
-
-    console.log(dbUserData);
-
     if (!dbUserData) {
-      res.status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+      res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -46,18 +39,13 @@ router.post('/login', async (req, res) => {
     console.log(validPassword);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+      res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
     req.session.save(() => {
       req.session.loggedIn = true;
-
-      res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+      res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
     });
   } catch (err) {
     console.log(err);
