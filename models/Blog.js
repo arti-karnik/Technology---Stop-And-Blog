@@ -1,5 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
+
+class Blog extends Model {
+}
 
 Blog.init(
   {
@@ -12,26 +16,26 @@ Blog.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [6],
-      },
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
-    date: {
-        type: DataTypes.STRING,
+    create_date: {
+        type: DataTypes.DATE,
         allowNull: false,
-      },
-    userId: {
-        type: DataTypes.STRING,
-        allowNull: false,
+    },
+    update_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
         references: {
-            model: 'user',
-            key: 'id',
-          },
-      },
+          model: 'user',
+          key: 'id'
+        }
+    }
   },
   {
     sequelize,
