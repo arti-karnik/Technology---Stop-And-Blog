@@ -15,7 +15,7 @@ router.get('/login', (req, res) => {
   res.render('loginPage');
 });
 
-router.get('/authorised', (req, res) => {
+router.get('/Dashboard', (req, res) => {
     res.render('Dashboard');
 });
 
