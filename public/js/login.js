@@ -16,7 +16,7 @@ const loginButtonClicked = async (event) => {
             alert("Logged in");
             document.location.replace('/Dashboard');
           } else {
-            alert('Failed to log in. ' + response.statusText);
+            alert(response.statusText);
           }
     }
 };

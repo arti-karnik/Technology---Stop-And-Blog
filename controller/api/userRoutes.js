@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
       res.status(200).json(dbUserData);
     })
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
       res.status(200).json(dbUserData);
     });
 
@@ -36,15 +36,13 @@ router.post('/login', async (req, res) => {
     }
 
     const validPassword = await dbUserData.checkPassword(req.body.password);
-    console.log(validPassword);
 
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+      res.status(400).status({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
-
     req.session.save(() => {
-      req.session.loggedIn = true;
+      req.session.logged_in = true;
       res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
     });
   } catch (err) {

@@ -16,7 +16,10 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/Dashboard', (req, res) => {
-    res.render('Dashboard');
+    res.render('Dashboard', {
+        logged_in: true
+    });
+   // res.render('Dashboard');
 });
 
 module.exports = router;
