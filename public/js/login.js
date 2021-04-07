@@ -1,18 +1,14 @@
-var loginForm = document.getElementById("form-login");
-var signUpForm = document.getElementById("form-sign-up");
 
-    const loginFormHandler = async (event) => {
-        alert("login clicked");
-        loginForm.style.visibility= "hidden";
-        signupForm.style.visibility= "hidden";
-    };
-    const signupFormHandler = async (event) => {
-        alert("sign up clicked");
-        loginForm.style.visibility= "hidden";
-        signupForm.style.visibility= "hidden";
-    };
-
-document.querySelector('.login-button').addEventListener('click', loginFormHandler);
-document.querySelector('.signup-button').addEventListener('click', signupFormHandler);
-document.querySelector('.already-have-account-button').addEventListener('click', showLoginForm);
-document.querySelector('.create-account-button').addEventListener('click', showSignUpForm);
+const loginButtonClicked = async (event) => {
+    event.preventDefault();
+    const userName = document.querySelector('.input-username-login').value.trim();
+    const password = document.querySelector('.input-password-login').value.trim();
+    if (userName && password) {
+        alert("login" + userName + password);
+    } else if (userName == "" || userName == null) {
+        alert("Please Enter Username");
+    } else if (password == "" || password == null) {
+        alert("Please Enter Password");
+    }
+};
+document.querySelector('.form-login').addEventListener('submit', loginButtonClicked);
