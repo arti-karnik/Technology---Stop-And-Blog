@@ -24,9 +24,7 @@ router.get('/', async (req, res) => {
         });
         if(blogData) {
             const blogs = blogData.map((blog) => blog.get({ plain: true }));
-            res.render('Comments', { blogs, loggedIn: req.session.logged_in });
-
-            // res.render('homePage', { blogs, loggedIn: req.session.logged_in });
+            res.render('homePage', { blogs, loggedIn: req.session.logged_in });
         }
     } catch (err) {
         res.status(500).json(err);
@@ -43,12 +41,43 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/Dashboard', (req, res) => {
-    res.render('Dashboard', {
-        logged_in: true
-    });
+    console.log("======== html DaSHbOARd" + req.session.user_id); 
+
+    Blog.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            attributes: [
+                'id',
+                'title',
+                'content',
+                'create_date'
+            ],
+            include: [{
+                    model: Comment,
+                    attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                },
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        })
+        .then(dbPostData => {
+            const posts = dbPostData.map(post => post.get({ plain: true }));
+            res.render('Dashboard', { posts, loggedIn: true });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
-router.get('/blogs', (req, res) => {
+router.get('/blog/:id', (req, res) => {
     Blog.findOne({
             where: {
                 id: req.params.id
@@ -57,10 +86,11 @@ router.get('/blogs', (req, res) => {
                 'id',
                 'content',
                 'title',
+                'create_date',
             ],
             include: [{
                     model: Comment,
-                    attributes: ['id', 'text', 'blog_id', 'user_id'],
+                    attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
                     include: {
                         model: User,
                         attributes: ['username']
@@ -79,16 +109,10 @@ router.get('/blogs', (req, res) => {
                 return;
             }
             const post = dbPostData.get({ plain: true });
-            console.log(post);
+            console.log("=========== " + post);
 
-            
-            //res.render('Post', {layout : 'main'});
-
-           // res.render('Comments', { post, loggedIn: req.session.logged_in });
-
-           // res.render('Comments', {post});
-
-           // res.render('Comments', { post, loggedIn: req.session.loggedIn });
+            res.render('Comments', { post, loggedIn: req.session.logged_in
+              });
         })
         .catch(err => {
             console.log(err);

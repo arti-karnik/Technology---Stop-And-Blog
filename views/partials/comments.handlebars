@@ -4,10 +4,10 @@
         <h3 class="card-header"></h3>
         <section class="comment card-body">
             <div class="text">
-                {{comment_text}}
+                {{text}}
             </div>
-            <div class="meta">
-                -{{user.username}}, {{format_date created_at}}
+            <div style="float:right">
+                <i><strong> Posted by {{user.username}} On  {{format_date date}} </strong></i>
             </div>
         </section>
     </div>

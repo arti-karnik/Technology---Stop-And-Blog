@@ -2,20 +2,20 @@ const { User } = require('../models');
 
 const userdata = [
   {
-    username: 'arti',
-    password: 'password1234',
+    username: 'arti1234',
+    password: '$2b$10$Vv/LoDHud5whZHsCE/Jn/.sKMEARPdcwoDpgb7.pyYo6dk5a3SlaO',
   },
   {
     username: 'Michael',
-    password: 'password1234',
+    password: '$2b$10$Vv/LoDHud5whZHsCE/Jn/.sKMEARPdcwoDpgb7.pyYo6dk5a3SlaO',
   },
   {
     username: 'Joseph',
-    password: 'password1234',
+    password: '$2b$10$Vv/LoDHud5whZHsCE/Jn/.sKMEARPdcwoDpgb7.pyYo6dk5a3SlaO',
   },
   {
     username: 'Meghs M',
-    password: 'password1234',
+    password: '$2b$10$Vv/LoDHud5whZHsCE/Jn/.sKMEARPdcwoDpgb7.pyYo6dk5a3SlaO',
   }
 ];
 

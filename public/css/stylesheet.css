@@ -1,3 +1,4 @@
+
 body {
   font-family: sans-serif;
   background-color: #d9ead4;
@@ -112,4 +113,8 @@ body {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+  }
+  .comment-user {
+      float: right;
+      color: rebeccapurple;
   }

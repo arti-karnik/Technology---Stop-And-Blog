@@ -1,37 +1,12 @@
-<div class="row">
-    <div class="col-md-12 w-100 p-3 d-flex flex-column justify-content-center">
-        <div class="row">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <!-- form card login -->
-                <div class="card rounded shadow shadow-sm">
-                    <div class="card-header">
-                        <h3 class="mb-0"> Edit Post </h3>
-                    </div>
-                    <div class="card-body">
-                        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-                            <div class="form-group">
-                                <label for="uname1">Title </label>
-                                <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="uname1" required="">
-                                <div class="invalid-feedback">Oops, you missed this one.</div>
-                            </div>
-                            <div class="form-group">
-                                <label>Content</label>
-                                <textarea rows="5" cols="10" class="form-control" name="comment" minlength="20" required> </textarea>
-                                <div class="invalid-feedback">Enter your password too!</div>
-                            </div>
-                            <div>
-                                <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
-                                <span class="custom-control-indicator"></span>
-                                </label>
-                            </div>
-                            <button type="submit" class="button btn-lg float-centre" id="btnLogin"> Create New Post </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/row-->
-
-    </div>
+<div class="card">
+    <h3 class="card-header">Edit Post</h3>
+    <form class="card-body edit-post-form">
+        <label for="post-title" class="form-label">Title</label>
+        <input name="post-title" type="text" value="{{post.title}}" class="form-input blog-title" />
+        <label class="form-label" for="content">Content</label>
+        <textarea rows="5" cols="10" class="form-control blog-content" name="comment" minlength="6" required="required"> {{ post.content}} </textarea>
+        <button type="submit" class="button edit-post">Update Post</button>
+        <button type="button" class="button delete-post">Delete Post</button>
+    </form>
 </div>
+<script src="/js/edit-post.js"></script>
