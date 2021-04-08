@@ -9,10 +9,16 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 // Set up Handlebars.js engine with custom helpers
-const hbs = exphbs.create({ helpers });
+//const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({ 
+  layoutsDir: path.join(__dirname, "views/layouts"),
+  partialsDir: path.join(__dirname, "views/partials"),
+  defaultLayout: 'main',
+  helpers: helpers
+ });
 
 const sess = {
   secret: 'Super secret secret',

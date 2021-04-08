@@ -1,12 +1,14 @@
  {{#each blogs as |blog| }}
- <div class="card">
-            <div class="card-header">
-                <h5 class="card-title"> {{blog.title}}</h5>
-                <h5 class="card-posted-date"> Posted by {{blog.username}} on {{blog.date}}</h5>
+ <div class="card blog-card" id={{id}}>
+            <div class="card-header" >
+                <h5 class="card-title">
+                  <a href="/blog/{{id}}">{{title}} </a> </h5>
+                <h5 class="card-posted-date"> Posted by {{user.username}} on {{format_date create_date}}</h5>
             </div>
            
             <div class="card-body">
-              <p class="card-text"> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <p class="card-text"> 
+                {{content}}
             </div>
       </div>
 {{/each}}
