@@ -18,19 +18,19 @@
                     <li class="nav-item active">
                         <a class="nav-link pl-0" href="/">Home <span class="sr-only">Home</span></a>
                     </li>  
-                       
-                    {{#if logged_in}}
+                    {{#if loggedIn}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/authorised">Dashboard</a>
+                        <a class="nav-link" href="/Dashboard">Dashboard</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" id="logout">Logout</a>
+                        <a class="nav-link" id="logout" >Logout</a>
                     </li>
                     {{else}}
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     {{/if}}
+
                 </ul>
             </div>
             <a class="navbar-title mx-auto d-block text-center order-0 order-md-1 w-25"> Technology-Stop And Blog </a>
@@ -46,7 +46,7 @@
         {{{ body }}}
     </main>
 </body>
-{{#if logged_in}}
+{{#if loggedIn}}
   <script src="/js/logout.js"></script>
 {{/if}}
 

@@ -13,7 +13,6 @@ const loginButtonClicked = async (event) => {
           });
        
           if (response.ok) {
-            alert("Logged in");
             document.location.replace('/Dashboard');
           } else {
             alert(response.statusText);

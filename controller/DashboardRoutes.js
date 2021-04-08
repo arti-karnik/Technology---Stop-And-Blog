@@ -31,7 +31,9 @@ router.get('/', withAuth, (req, res) => {
         })
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('Dashboard', { posts, loggedIn: true });
+            let isLogin= true;
+            console.log("-------- set value =====");
+            res.render('Dashboard', { posts, isLogin });
         })
         .catch(err => {
             console.log(err);
