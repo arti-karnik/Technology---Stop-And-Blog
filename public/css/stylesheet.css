@@ -2,6 +2,9 @@ body {
   font-family: sans-serif;
   background-color: #d9ead4;
 }
+a {
+  color: white;
+}
 
 /******************* Navbar *******************/
 .navbar {
@@ -66,9 +69,12 @@ body {
   .card-header {
     background-color: #231010;
     color: white;
+    align-items: center;
   }
   .card-title {
     float: left;
+    color: white;
+    font-family: 'Lucida Sans';
   }
   .card-posted-date {
     float: right;
@@ -106,9 +112,10 @@ body {
     border-radius: 15px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }  
-  a:hover {
+  a, a:hover {
     text-decoration: none;
     color: white;
+    font-family: 'Trebuchet MS';
   }
   
   input[type=text], input[type=password] {
@@ -134,5 +141,4 @@ body {
   }
 
   
-
   
