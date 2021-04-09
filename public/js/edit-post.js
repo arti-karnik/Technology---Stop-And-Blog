@@ -22,7 +22,6 @@ async function editPost(event) {
       
       if (response.ok) {
         alert("Blog Updated");
-
         document.location.replace('/dashboard/');
       } else {
         alert(response.statusText);
@@ -30,7 +29,6 @@ async function editPost(event) {
 
 }
 async function deletePost(event) {
-  alert("delete");
   event.preventDefault();
 
     const id = window.location.toString().split('/')[

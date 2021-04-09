@@ -1,7 +1,4 @@
-const blogClicked = async (event) => {
-  return;
-  
-  alert(event);
+const blogClicked = async (event) => {  
   const response = await fetch('/api/users/login', {
     method: 'POST',
     body: JSON.stringify({ username, password }),

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Blog, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Import the custom middleware
+//Home page
 router.get('/', async (req, res) => {
     try {
         const blogData = await Blog.findAll({
@@ -30,16 +30,16 @@ router.get('/', async (req, res) => {
    
 });
 
+// signup page
 router.get('/signUp', (req, res) => {
     res.render('signUpPage');
 });
 
+// Login page
 router.get('/login', (req, res) => {
-    
-  res.render('loginPage', { title: "Login" , active: {Register: true }});
+    res.render('loginPage');
 });
-
-router.get('/Dashboard', (req, res) => {
+router.get('/Dashboard', withAuth, (req, res) => {
     Blog.findAll({
             where: {
                 user_id: req.session.user_id
@@ -66,7 +66,7 @@ router.get('/Dashboard', (req, res) => {
         })
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('Dashboard', { posts , loggedIn: req.session.loggedIn });
+            res.render('Dashboard', { posts, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);
@@ -74,7 +74,8 @@ router.get('/Dashboard', (req, res) => {
         });
 });
 
-router.get('blog/edit/:id', withAuth, (req, res) => {
+
+router.get('/Dashboard/edit/:id', withAuth, (req, res) => {
     Blog.findOne({
             where: {
                 id: req.params.id
@@ -104,7 +105,7 @@ router.get('blog/edit/:id', withAuth, (req, res) => {
                 return;
             }
             const post = dbPostData.get({ plain: true });
-            res.render('EditPost', { post, loggedIn: req.session.loggedIn  });
+            res.render('EditPost', { post, loggedIn: true });
         })
         .catch(err => {
             console.log(err);
@@ -112,8 +113,12 @@ router.get('blog/edit/:id', withAuth, (req, res) => {
         });
 })
 
+//Add new post 
+router.get('/addnewPost', (req, res) => {
+    res.render('AddNewPost');
+});
 
-router.get('/blog/:id', withAuth, (req, res) => {
+router.get('/blog/:id', withAuth,  (req, res) => {
     Blog.findOne({
             where: {
                 id: req.params.id
@@ -151,6 +156,5 @@ router.get('/blog/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-
 
 module.exports = router;

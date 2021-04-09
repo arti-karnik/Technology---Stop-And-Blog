@@ -32,7 +32,9 @@ Comment.init(
         references: {
           model: 'blog',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
     }
   },
   {
