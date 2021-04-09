@@ -10,7 +10,6 @@ const sequelize = new Sequelize(
     USER: "b4dc0ce011ccbb",
     PASSWORD: "5347da50",
     DB: "heroku_e2f9d8952254755",
-    host: 'localhost',
     dialect: 'mysql',
     port: 3306,
   }
