@@ -6,10 +6,10 @@ const blogClicked = async (event) => {
   });
 
   if (response.ok) {
-    alert("Logged in");
+    alert("you're Logged in!!");
     document.location.replace('/Dashboard');
   } else {
-    alert(response.statusText);
+    alert("Something wrong happened, please try again!!");
   }
 };
 document.querySelector(".blog-card").addEventListener("click", blogClicked);

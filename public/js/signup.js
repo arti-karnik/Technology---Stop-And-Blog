@@ -20,7 +20,7 @@ const signupFormHandler = async (event) => {
             alert("You're able to successfully create an account");
             document.location.replace('/Dashboard');
           } else {
-            alert('Failed to log in. ' + response.statusText);
+            alert("Something wrong happened, please try again!!");
           }
     }
 };

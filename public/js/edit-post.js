@@ -3,7 +3,6 @@ async function editPost(event) {
 
     const title = document.querySelector('.blog-title').value;
     const content = document.querySelector('.blog-content').value;
-    alert(title, content);
     const id = window.location.toString().split('/')[
       window.location.toString().split('/').length - 1
     ];

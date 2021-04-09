@@ -1,5 +1,4 @@
 async function commentFormHandler(event) {
-    alert("comment clicked");
     event.preventDefault();
     let currentdate = new Date().toLocaleDateString();
 
@@ -8,7 +7,6 @@ async function commentFormHandler(event) {
     const blog_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
-    alert(text);
 
     if (text) {
         const response = await fetch('/api/comments', {
@@ -18,14 +16,11 @@ async function commentFormHandler(event) {
                 'Content-Type': 'application/json'
             }
         });
-        alert(response);
-
-
         if (response.ok) {
-            alert(response.statusText);
+            alert("Comment added");
             document.location.reload();
         } else {
-            alert(response.statusText);
+            alert("Something wrong happened, please try again!!");
             document.querySelector('#comment-form').style.display = "block";
         }
     }

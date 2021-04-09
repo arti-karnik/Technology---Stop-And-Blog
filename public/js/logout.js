@@ -5,10 +5,10 @@ const logout = async () => {
     });
   
     if (response.ok) {
-        alert("Logout dddd");
+        alert("You're Logout!!");
         document.location.replace('/');
     } else {
-      alert(response.statusText);
+      alert("Something wrong happened, please try again!!");
     }
   };
   

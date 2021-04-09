@@ -14,7 +14,7 @@ const loginButtonClicked = async (event) => {
           if (response.ok) {
             document.location.replace('/Dashboard');
           } else {
-            alert(response.statusText);
+            alert("Incorrect email or password. Please try again!");
           }
     }
 };

@@ -2,10 +2,10 @@
     <h3 class="card-header">Create New Post</h3>
     <form class="card-body form-new-blog" id="new-post-form">
         <label  class="form-label">Title</label>
-        <input type="text" id="blog-title" name="post-title" class="form-input" />
-        <label class="form-label">Content</label>
-        <input id="blog-content" name="content" class="form-input" />
-        <button type="submit" class="btn">Create</button>
+         <input name="post-title" type="text" id="blog-title" class="form-input blog-title" />
+        <label class="form-label" for="content">Content</label>
+        <textarea id="blog-content" rows="5" cols="10" class="form-control blog-content" name="comment" minlength="6" required="required"> {{ post.content}} </textarea>
+        <button type="submit" class="button">Add New Blog</button>
     </form>
 </div>
 

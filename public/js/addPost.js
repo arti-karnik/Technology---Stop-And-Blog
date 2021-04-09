@@ -12,10 +12,10 @@ const newPostButtonClicked = async (event) => {
           });
        
           if (response.ok) {
-              alert("Blog created");
+            alert("Blog added");
             document.location.replace('/Dashboard');
           } else {
-            alert(response.statusText);
+            alert("Something wrong happened, please try again!!");
           }
     }
 };
