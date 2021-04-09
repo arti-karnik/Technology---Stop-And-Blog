@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/stylesheet.css">
-
     <title>Technology-StopAndBlog</title>
 </head>
 <body>
@@ -23,7 +22,7 @@
                         <a href="/Dashboard">Dashboard</a>
                     </li>
                      <li class="nav-item">
-                        <a class="nav-link" id="logout" >Logout</a>
+                        <a class="nav-link" id="logout">Logout</a>
                     </li>
                     {{else}}
                     <li class="nav-item">
@@ -44,7 +43,9 @@
     {{{ body }}}
     </main>
 </body>
+
 {{#if loggedIn}}
   <script src="/js/logout.js"></script>
 {{/if}}
+
 </html>

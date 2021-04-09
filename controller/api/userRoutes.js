@@ -32,13 +32,12 @@ router.post('/login', async (req, res) => {
     });
     if (!dbUserData) {
       res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
-      return;
     }
-
     const validPassword = await dbUserData.checkPassword(req.body.password);
+    console.log("is password: " + validPassword + "we");
+
     if (!validPassword) {
-      res.status(400).status({ message: 'Incorrect email or password. Please try again!' });
-      return;
+      res.status(400).json({ message: 'Incorrect password. Please try again!' });
     }
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
