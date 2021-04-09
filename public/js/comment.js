@@ -8,6 +8,7 @@ async function commentFormHandler(event) {
     const blog_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
+    alert(text);
 
     if (text) {
         const response = await fetch('/api/comments', {
@@ -17,11 +18,12 @@ async function commentFormHandler(event) {
                 'Content-Type': 'application/json'
             }
         });
+        alert(response);
+
 
         if (response.ok) {
             alert(response.statusText);
             document.location.reload();
-
         } else {
             alert(response.statusText);
             document.querySelector('#comment-form').style.display = "block";

@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const { User, Blog, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 // Import the custom middleware
-//const withAuth = require('../utils/auth');
-
-
 router.get('/', async (req, res) => {
     try {
         const blogData = await Blog.findAll({
@@ -24,7 +22,7 @@ router.get('/', async (req, res) => {
         });
         if(blogData) {
             const blogs = blogData.map((blog) => blog.get({ plain: true }));
-            res.render('homePage', { blogs, loggedIn: req.session.logged_in });
+            res.render('homePage', { blogs, loggedIn: req.session.loggedIn });
         }
     } catch (err) {
         res.status(500).json(err);
@@ -37,12 +35,11 @@ router.get('/signUp', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.render('loginPage');
+    
+  res.render('loginPage', { title: "Login" , active: {Register: true }});
 });
 
 router.get('/Dashboard', (req, res) => {
-    console.log("======== html DaSHbOARd" + req.session.user_id); 
-
     Blog.findAll({
             where: {
                 user_id: req.session.user_id
@@ -69,7 +66,7 @@ router.get('/Dashboard', (req, res) => {
         })
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('Dashboard', { posts, loggedIn: true });
+            res.render('Dashboard', { posts , loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);
@@ -77,7 +74,46 @@ router.get('/Dashboard', (req, res) => {
         });
 });
 
-router.get('/blog/:id', (req, res) => {
+router.get('blog/edit/:id', withAuth, (req, res) => {
+    Blog.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: ['id',
+                'title',
+                'content',
+                'create_date'
+            ],
+            include: [{
+                    model: User,
+                    attributes: ['username']
+                },
+                {
+                    model: Comment,
+                    attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                }
+            ]
+        })
+        .then(dbPostData => {
+            if (!dbPostData) {
+                res.status(404).json({ message: 'No blog found with this id' });
+                return;
+            }
+            const post = dbPostData.get({ plain: true });
+            res.render('EditPost', { post, loggedIn: req.session.loggedIn  });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+})
+
+
+router.get('/blog/:id', withAuth, (req, res) => {
     Blog.findOne({
             where: {
                 id: req.params.id
@@ -103,20 +139,18 @@ router.get('/blog/:id', (req, res) => {
             ]
         })
         .then(dbPostData => {
-            console.log(dbPostData);
             if (!dbPostData) {
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
             const post = dbPostData.get({ plain: true });
-            console.log("=========== " + post);
-
-            res.render('Comments', { post, loggedIn: req.session.logged_in
-              });
+            res.render('Comments', { post, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
+
+
 module.exports = router;

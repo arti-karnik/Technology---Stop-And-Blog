@@ -1,6 +1,5 @@
 
 const loginButtonClicked = async (event) => {
-
     event.preventDefault();
     const username = document.querySelector('.input-username-login').value.trim();
     const password = document.querySelector('.input-password-login').value.trim();

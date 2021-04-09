@@ -1,4 +1,6 @@
 const blogClicked = async (event) => {
+  return;
+  
   alert(event);
   const response = await fetch('/api/users/login', {
     method: 'POST',

@@ -1,14 +1,24 @@
 
+:root {
+  --primary: #ccdad1;
+  --secondary: #dce9d5;
+  --tertiary: #788585;
+  --light-dark: #a1a0a1;
+  --dark: #201110;
+  --border-radius: .3rem;
+}
+
 body {
   font-family: sans-serif;
   background-color: #d9ead4;
 }
+
 .navbar {
     background-color: #231010;
     padding-top: 20px;
 }
 
-#nav-title {
+.navbar-title  {
     text-align:center;
     color: whitesmoke;
     font-style: italic;
@@ -16,6 +26,7 @@ body {
     text-align: center;
     font: x-large;
     text-align: center;
+    font-size: 20px;
   }
   
   .navbar-nav  a {
@@ -37,8 +48,9 @@ body {
     font-size: 20px;
     font-weight: bold;
     font-family: 'Raleway', sans-serif;
+    color: red;
   }
-  .navbar-nav > .active {
+  .navbar-nav .nav-item  {
     background-color: #3f3232;
     color : white;
     border-radius: 25px;
@@ -65,7 +77,7 @@ body {
     background-color: #231010;
     color: white;
   }
-    .card-title {
+  .card-title {
     float: left;
   }
   .card-posted-date {
@@ -118,3 +130,16 @@ body {
       float: right;
       color: rebeccapurple;
   }
+  #title {
+    background-color: #ccdad1;
+    color: #201110;
+    padding: 0 10px;
+    font-size: 21px;
+    border-radius: 10px;
+    box-shadow: 5px 2px #a1a0a1;
+    width: 200px;
+  }
+
+  
+
+  

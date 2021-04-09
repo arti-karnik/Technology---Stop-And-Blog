@@ -4,8 +4,7 @@ const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
-    console.log('======================');
-    Post.findAll({
+    Blog.findAll({
             attributes: ['id',
                 'title',
                 'content',
@@ -35,8 +34,10 @@ router.get('/', (req, res) => {
         });
 
 });
+
+
 router.get('/:id', (req, res) => {
-    Post.findOne({
+    Blog.findOne({
             where: {
                 id: req.params.id
             },
@@ -70,56 +71,6 @@ router.get('/:id', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-});
-
-router.post('/', withAuth, (req, res) => {
-    Post.create({
-            title: req.body.title,
-            content: req.body.content,
-            user_id: req.session.user_id
-        })
-        .then(dbPostData => res.json(dbPostData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
-router.put('/:id', withAuth, (req, res) => {
-    Blog.update({
-            title: req.body.title,
-            content: req.body.content
-        }, {
-            where: {
-                id: req.params.id
-            }
-        }).then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: 'No blog found with this id' });
-                return;
-            }
-            res.json(dbPostData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-router.delete('/:id', withAuth, (req, res) => {
-    Blog.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(dbPostData => {
-        if (!dbPostData) {
-            res.status(404).json({ message: 'Blog post found with this id' });
-            return;
-        }
-        res.json(dbPostData);
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
 });
 
 module.exports = router;
