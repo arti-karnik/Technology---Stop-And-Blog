@@ -25,6 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(routes);
+
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening to PORT ${PORT}`));
+    app.listen(process.env.PORT || 3000, function(){
+        console.log(`Express server listening on port ${this.address().port} in ${app.settings.env} mode`);
+      });
+
+   // app.listen(PORT, () => console.log(`Now listening to PORT ${PORT}`));
 });
