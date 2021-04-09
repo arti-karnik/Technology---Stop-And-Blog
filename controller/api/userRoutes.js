@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../../models/User');
 const withAuth = require('../../utils/auth');
 
-// CREATE new user
+// CREATE NEW USER
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Login
+// LOGIN WITH USER
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
@@ -34,7 +34,6 @@ router.post('/login', async (req, res) => {
       res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
     }
     const validPassword = await dbUserData.checkPassword(req.body.password);
-
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect password. Please try again!' });
     }
@@ -48,7 +47,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Logout
+// LOGOUT 
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
@@ -59,9 +58,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
-
-
-
+// EDIT BLOG BY ID 
 router.get('blog/edit/:id', withAuth, (req, res) => {
   Blog.findOne({
           where: {

@@ -1,14 +1,13 @@
-
- <div class="card">
+<div class="card">
     <div class="card-header">
         <h5 class="card-title"> {{ post.title }} </h5>
         <h5 class="card-posted-date"> Posted by {{post.user.username}} on
-            {{format_date post.create_date }}
+            {{format_date blogs.create_date }}
     </h5>
     </div>
     <div class="card-body">
         <p class="card-text">
-            {{ post.content }}
+            {{ blogs.content }}
     </div>
     </div>
 
@@ -25,6 +24,6 @@
         </div>
 </div>
 
-{{> comments post.comments}}
+{{> comments blogs.comments}}
 
 <script src="/js/comment.js"></script>

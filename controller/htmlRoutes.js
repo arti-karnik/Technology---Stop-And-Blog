@@ -1,8 +1,9 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { User, Blog, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-//Home page
+// OPEN HOME PAGE
 router.get('/', async (req, res) => {
     try {
         const blogData = await Blog.findAll({
@@ -30,82 +31,55 @@ router.get('/', async (req, res) => {
    
 });
 
-// signup page
+// OPEN SIGN-UP PAGE
 router.get('/signUp', (req, res) => {
     res.render('signUpPage');
 });
 
-// Login page
+// OPEN LOGIN PAGE
 router.get('/login', (req, res) => {
     res.render('loginPage');
 });
+
+// OPEN DASHBOARD PAGE
 router.get('/Dashboard', withAuth, (req, res) => {
     Blog.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
-            attributes: [
-                'id',
-                'title',
-                'content',
-                'create_date'
-            ],
-            include: [{
-                    model: Comment,
+            where: { user_id: req.session.user_id },
+            attributes: [ 'id', 'title', 'content', 'create_date' ],
+            include: [{ model: Comment,
                     attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
+                    include: {  model: User, attributes: ['username'] }
                 },
-                {
-                    model: User,
-                    attributes: ['username']
-                }
+                { model: User, attributes: ['username'] }
             ]
         })
-        .then(dbPostData => {
-            const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('Dashboard', { posts, loggedIn: req.session.loggedIn });
+        .then(response => {
+            const blogs = response.map(blog => blog.get({ plain: true }));
+            res.render('Dashboard', { blogs, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json(err);
         });
 });
 
-
+// EDIT BLOG BY ID 
 router.get('/Dashboard/edit/:id', withAuth, (req, res) => {
     Blog.findOne({
-            where: {
-                id: req.params.id
-            },
-            attributes: ['id',
-                'title',
-                'content',
-                'create_date'
-            ],
-            include: [{
-                    model: User,
-                    attributes: ['username']
-                },
-                {
-                    model: Comment,
-                    attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                }
-            ]
-        })
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: 'No blog found with this id' });
-                return;
+            where: { id: req.params.id },
+            attributes: ['id', 'title', 'content', 'create_date' ],
+            include: [{ model: User, attributes: ['username'] },
+            { model: Comment, attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
+             include: { model: User, attributes: ['username'] 
             }
-            const post = dbPostData.get({ plain: true });
-            res.render('EditPost', { post, loggedIn: true });
+        }]
+    })
+    .then(response => {
+        if (!response) {
+            res.status(404).json({ message: 'No blog found with this id' });
+            return;
+        }
+        const blogs = response.get({ plain: true });
+        res.render('EditPost', { blogs, loggedIn: true });
         })
         .catch(err => {
             console.log(err);
@@ -113,22 +87,18 @@ router.get('/Dashboard/edit/:id', withAuth, (req, res) => {
         });
 })
 
-//Add new post 
-router.get('/addnewPost', (req, res) => {
+// ADD NEW BLOG
+router.get('/addnewBlog', (req, res) => {
     res.render('AddNewPost');
 });
 
+// OPEN OTHER USER'S BLOG BY ID
 router.get('/blog/:id', withAuth,  (req, res) => {
-    Blog.findOne({
+    Blog.findOne({ 
             where: {
                 id: req.params.id
             },
-            attributes: [
-                'id',
-                'content',
-                'title',
-                'create_date',
-            ],
+            attributes: ['id', 'content', 'title', 'create_date', ],
             include: [{
                     model: Comment,
                     attributes: ['id', 'text', 'blog_id', 'user_id', 'date'],
@@ -140,16 +110,15 @@ router.get('/blog/:id', withAuth,  (req, res) => {
                 {
                     model: User,
                     attributes: ['username']
-                }
-            ]
+                }]
         })
-        .then(dbPostData => {
-            if (!dbPostData) {
+        .then(response => {
+            if (!response) {
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
-            const post = dbPostData.get({ plain: true });
-            res.render('Comments', { post, loggedIn: req.session.loggedIn });
+            const blogs = response.get({ plain: true });
+            res.render('Comments', { blogs, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);

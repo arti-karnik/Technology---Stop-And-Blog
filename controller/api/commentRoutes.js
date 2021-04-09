@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// Post comment
+// CREATE NEW COMMENT
 router.post('/', withAuth, (req, res) => {
     Comment.create({
         text: req.body.text,
@@ -15,4 +15,5 @@ router.post('/', withAuth, (req, res) => {
         res.status(400).json(err);
     })
 });
+
 module.exports = router;

@@ -1,12 +1,12 @@
 
 <div class="newPost">
-<a href="/addnewPost"><button class="button"> + New Post</button></a>
+    <a href="/addnewBlog"><button class="button"> + New Post</button></a>
 </div>
 
-{{#if posts.length}}
+{{#if blogs.length}}
 <div class="container-dashboard">
-     {{#each posts as |post|}}
-        {{> dashboard-postinfo post}}
+     {{#each blogs as |blog|}}
+        {{> bloginfo_LoggedUser blog}}
     {{/each}}
 </div>
 {{/if}}
