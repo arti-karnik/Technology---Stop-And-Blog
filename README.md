@@ -43,6 +43,10 @@ Install NodeJS
     </li>
     <li> 
     <a href="https://dev.mysql.com/doc/" target="_blank">mySQL </a>
+    </li>
+     <li> 
+    <a href="https://handlebarsjs.com/" target="_blank">Handlebars </a>
+    </li>
 </ul>
 
 ## Install:
