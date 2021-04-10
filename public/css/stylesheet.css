@@ -145,6 +145,19 @@ a {
     box-shadow: 5px 2px #a1a0a1;
     width: 200px;
   }
-
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer {
+  color: gray;
+  text-align: center;
+  padding-top: 5px;
+  font-size: 15px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #252729;
+ }
   
   
