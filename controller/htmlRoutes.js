@@ -106,11 +106,13 @@ router.get('/Dashboard/edit/:id', withAuth, (req, res) => {
 
 // ADD NEW BLOG
 router.get('/addnewBlog', (req, res) => {
-    req.session.isLogin = false;
-            req.session.isDashboard = true;
-            req.session.isHome = false;
-            
-    res.render('AddNewPost', {isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome });
+    req.session.save(() => {
+        req.session.isLogin = false;
+        req.session.isDashboard = true;
+        req.session.isHome = false;
+        req.session.loggedIn = true;
+    });
+    res.render('AddNewPost', {loggedIn: req.session.loggedIn,  isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome });
 });
 
 // OPEN OTHER USER'S BLOG BY ID
