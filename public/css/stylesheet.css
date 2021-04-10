@@ -8,11 +8,7 @@ a {
 main {
   margin-bottom: 5%;
 }
-.newPost {
-  margin-bottom: 50px;
-}
 
-/******************* Navbar *******************/
 .navbar {
     background-color: #231010;
     padding-top: 20px;
@@ -104,15 +100,6 @@ main {
   }
 
   /******************* ADD NEW POST BUTTON *******************/
-  .newPost {
-    position:absolute;
-    bottom: 5%;
-    right:50%;
-  }
-  .container-dashboard {
-    padding: 30px;
-    margin: 20px;
-  }
   #row {
     text-align: left;
     border-bottom: 2px solid lightgray;
@@ -166,5 +153,7 @@ main {
   width: 100%;
   background-color: #252729;
  }
-  
-  
+ .newPost {
+  text-align: center;
+  margin-top: 10px;
+}
