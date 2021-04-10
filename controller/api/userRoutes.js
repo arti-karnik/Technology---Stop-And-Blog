@@ -13,6 +13,12 @@ router.post('/', async (req, res) => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
+
+      /*req.session.isLogin = false;
+      req.session.isDashboard = false;
+      req.session.isHome = true;*/
+
+
       res.json(dbUserData);
     });
 
@@ -40,7 +46,11 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-      res.status(200).json({ user: dbUserData, message: `You are now logged in! ${dbUserData.id}`  });
+      req.session.isLogin = true;
+      req.session.isDashboard = false;
+      req.session.isHome = false;
+
+      res.status(200).json({ user: dbUserData, message: `You are now logged in! ${dbUserData.id}`, isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome  });
     });
   } catch (err) {
     res.status(500).json(err);
@@ -51,6 +61,9 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
+      /*req.session.isLogin = false;
+      req.session.isDashboard = false;
+      req.session.isHome = true;*/
       res.status(204).end();
     });
   } else {
@@ -89,7 +102,11 @@ router.get('blog/edit/:id', withAuth, (req, res) => {
               return;
           }
           const post = dbPostData.get({ plain: true });
-          res.render('EditPost', { post, loggedIn: req.session.loggedIn  });
+          req.session.isLogin = false;
+            req.session.isDashboard = false;
+            req.session.isHome = true;
+            
+          res.render('EditPost', { post, loggedIn: req.session.loggedIn , blogs, loggedIn: req.session.loggedIn , isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome  });
       })
       .catch(err => {
           console.log(err);

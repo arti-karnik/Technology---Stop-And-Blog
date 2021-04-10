@@ -22,8 +22,11 @@ router.get('/', async (req, res) => {
         ]
         });
         if(blogData) {
+            req.session.isLogin = false;
+            req.session.isDashboard = false;
+            req.session.isHome = true;
             const blogs = blogData.map((blog) => blog.get({ plain: true }));
-            res.render('homePage', { blogs, loggedIn: req.session.loggedIn });
+            res.render('homePage', { blogs, loggedIn: req.session.loggedIn, isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome  });
         }
     } catch (err) {
         res.status(500).json(err);
@@ -33,12 +36,20 @@ router.get('/', async (req, res) => {
 
 // OPEN SIGN-UP PAGE
 router.get('/signUp', (req, res) => {
-    res.render('signUpPage');
+    req.session.isLogin = true;
+            req.session.isDashboard = false;
+            req.session.isHome = false;
+            
+    res.render('signUpPage', {isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome });
 });
 
 // OPEN LOGIN PAGE
 router.get('/login', (req, res) => {
-    res.render('loginPage');
+    req.session.isLogin = true;
+    req.session.isDashboard = false;
+    req.session.isHome = false;
+
+    res.render('loginPage', { isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome});
 });
 
 // OPEN DASHBOARD PAGE
@@ -55,7 +66,10 @@ router.get('/Dashboard', withAuth, (req, res) => {
         })
         .then(response => {
             const blogs = response.map(blog => blog.get({ plain: true }));
-            res.render('Dashboard', { blogs, loggedIn: req.session.loggedIn });
+            req.session.isLogin = false;
+            req.session.isDashboard = true;
+            req.session.isHome = false;
+            res.render('Dashboard', { blogs, loggedIn: req.session.loggedIn,  isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome  });
         })
         .catch(err => {
             res.status(500).json(err);
@@ -79,7 +93,10 @@ router.get('/Dashboard/edit/:id', withAuth, (req, res) => {
             return;
         }
         const blogs = response.get({ plain: true });
-        res.render('EditPost', { blogs, loggedIn: true });
+        req.session.isLogin = false;
+        req.session.isDashboard = true;
+        req.session.isHome = false;
+        res.render('EditPost', { blogs, loggedIn: true, isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome });
         })
         .catch(err => {
             console.log(err);
@@ -89,7 +106,11 @@ router.get('/Dashboard/edit/:id', withAuth, (req, res) => {
 
 // ADD NEW BLOG
 router.get('/addnewBlog', (req, res) => {
-    res.render('AddNewPost');
+    req.session.isLogin = false;
+            req.session.isDashboard = true;
+            req.session.isHome = false;
+            
+    res.render('AddNewPost', {isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome });
 });
 
 // OPEN OTHER USER'S BLOG BY ID
@@ -118,7 +139,12 @@ router.get('/blog/:id', withAuth,  (req, res) => {
                 return;
             }
             const blogs = response.get({ plain: true });
-            res.render('Comments', { blogs, loggedIn: req.session.loggedIn });
+            req.session.isLogin = false;
+            req.session.isDashboard = false;
+            req.session.isHome = true;
+            
+
+            res.render('Comments', { blogs, loggedIn: req.session.loggedIn , isLogin: req.session.isLogin, isDashboard:req.session.isDashboard, isHome: req.session.isHome });
         })
         .catch(err => {
             console.log(err);

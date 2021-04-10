@@ -27,7 +27,7 @@ app.set('view engine', 'handlebars');
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-    app.listen(process.env.PORT || 3007, function(){
+    app.listen(process.env.PORT || 3010, function(){
         console.log(`Express server listening on port ${this.address().port} in ${app.settings.env} mode`);
       });
 });

@@ -50,7 +50,6 @@ async function deletePost(event) {
       } else {
         alert(response.statusText);
       }
-    
 }
 document.querySelector('.delete-post').addEventListener('click', deletePost);
 document.querySelector('.edit-post').addEventListener('click', editPost);
